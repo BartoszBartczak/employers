@@ -4,6 +4,24 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class EmployeesService {
+  postEmployee(value: any) {
+    throw new Error('Method not implemented.');
+  }
+  constructor() {
+    this.getEmployeeNames(newFunction());
+    this.checkList();
+
+    function newFunction(this: any): Employee[] {
+      return this.newMethod().employees;
+    }
+}
+  private newMethod() {
+    return this;
+  }
+
+  checkList() {
+    throw new Error('Method not implemented.');
+  }
 
 
     employees = [
@@ -41,5 +59,25 @@ export class EmployeesService {
            salary: 3100
         }
     ];
+    getEmployeeNames(employees: Employee[]) {
+      const prefix: string = 'B';
+
+      return employees.map((employee: Employee) => {
+          const preparedName: string = `${prefix} ${employee.firstName} ${employee.lastName}`;
+
+          return preparedName;
+      });
+  }
+
+  
 }
+
+export interface Employee {
+  id: number;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  salary: number;
+}
+
 
