@@ -4,28 +4,20 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class EmployeesService {
-  postEmployee(value: any) {
-    throw new Error('Method not implemented.');
-  }
+  
+  
   constructor() {
-    this.getEmployeeNames(newFunction());
-    this.checkList();
-
-    function newFunction(this: any): Employee[] {
-      return this.newMethod().employees;
-    }
+    this.getEmployeeNames(this.employees);
+    
 }
-  private newMethod() {
-    return this;
-  }
 
-  checkList() {
-    throw new Error('Method not implemented.');
-  }
+
+isListClosed: boolean = false;
 
 
     employees = [
         {
+            id: 1,
             firstName: 'Jan',
             lastName: 'Kowalski',
             position: 'IT',
@@ -33,6 +25,7 @@ export class EmployeesService {
             
         },
         {
+           id: 2,
            firstName: 'Anna',
            lastName: 'Bąk',
            position: 'Administracja',
@@ -40,6 +33,7 @@ export class EmployeesService {
           
         },
         {
+           id: 3,
            firstName: 'Paweł',
            lastName: 'Zabłocki',
            position: 'IT',
@@ -47,27 +41,32 @@ export class EmployeesService {
            
         },
         {
+           id: 4,
            firstName: 'Tomasz',
            lastName: 'Osiecki',
            position: 'Administracja',
            salary: 2100
         },
         {
+           id: 5,
            firstName: 'Iwona',
            lastName: 'Lehis-Gutowska',
            position: 'Handlowiec',
            salary: 3100
         }
     ];
+
     getEmployeeNames(employees: Employee[]) {
-      const prefix: string = 'B';
+     
 
       return employees.map((employee: Employee) => {
-          const preparedName: string = `${prefix} ${employee.firstName} ${employee.lastName}`;
+          const preparedName: string = `${employee.firstName} ${employee.lastName}`;
 
           return preparedName;
       });
   }
+
+  
 
   
 }
@@ -76,7 +75,6 @@ export interface Employee {
   id: number;
   firstName: string;
   lastName: string;
-  dateOfBirth: string;
   salary: number;
 }
 

@@ -9,7 +9,7 @@
           <div class="row">
             <table class="table table-dark">
               <thead>
-                <tr>
+                <tr *ngFor="let employee of employees">
                   <th>Imię</th>
                   <th>Nazwisko</th>
                   <th>Dział</th>
@@ -20,20 +20,13 @@
               </thead>
               <tbody>
                 <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>{{ employee.id }}</td>
+                  <td>{{ employee.firstName }}</td>
+                  <td>{{ employee.lastName }}</td>
+                  <td>{{ employee.position }}</td>
                   
-                  <td></td>
-                  <td appManager></td>
-                  <td></td>
-                  <td>
-                    <button
-                     
-                    >
-                      <span aria-hidden="true"></span>
-                    </button>
-                  </td>
+                  <td>{{ employee.salary }}</td>
+                  
                 </tr>
               </tbody>
             </table>
@@ -66,7 +59,7 @@
 
         <div class="container">
           <h1 class="display-4">Dodaj nowego pracownika</h1>
-          <form>
+          <form [formGroup]="employeeForm">
             <div class="row form-group">
               <div class="col-sm-4">
                 <label>Imię</label>
@@ -118,15 +111,8 @@
             </div>
             <div class="row">
               <div class="col-sm-12">
-                <button
-                
-                >
+                <button>
                   Dodaj
-                </button>
-                <button
-                  
-                >
-                  Zresetuj formularz
                 </button>
               </div>
             </div>
