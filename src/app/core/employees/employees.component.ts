@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Employee, EmployeesService } from '../employees.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { Employee } from './shared/employee.model';
+import { EmployeesService } from './shared/employees.service';
 
 @Component({
   selector: 'app-employees',
@@ -11,8 +13,6 @@ import { Employee, EmployeesService } from '../employees.service';
 export class EmployeesComponent implements OnInit {
   employeesList: Employee[] = [];
   employeeForm!: FormGroup;
- 
-  
 
   constructor(private employeesService: EmployeesService, private formBuilder: FormBuilder) { }
 
@@ -20,31 +20,31 @@ export class EmployeesComponent implements OnInit {
     this.getEmployeesList();
     this.employeeForm = this.createEmployeeForm();
   }
+
   
-  getEmployeesList(): void {
-    this.employeesService.getEmployeeNames().subscribe(() => {
-      this.getEmployeesList();
-      
+  private getEmployeesList(): void {
+    this.employeesService.getEmployees().subscribe(employeesList => {
+      this.employeesList = employeesList;
     });
   }
 
   
-
   createEmployeeForm(): FormGroup {
     return this.formBuilder.group({
-      firstName: [''],
-      lastName: [''],
-      dateOfBirth: [''],
-      position: [''],
-      salary: ['']
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      position: ['', Validators.required],
+      salary: ['', Validators.required]
     });
+  }
+
+  addEmployee(): void {
+    this.employeesService.postEmployee(this.employeeForm.value).subscribe(() => {
+      this.getEmployeesList();
+      this.employeeForm.reset();
+    });
+  }
 
   
-  
-  
-}
-}
-function employees(_employees: any, _arg1: any) {
-  throw new Error('Function not implemented.');
 }
 
