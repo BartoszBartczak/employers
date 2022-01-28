@@ -42,7 +42,10 @@ export class EmployeesComponent implements OnInit {
     this.employeesService.postEmployee(this.employeeForm.value).subscribe(() => {
       this.getEmployeesList();
       this.employeeForm.reset();
+      
     });
+
+    
   }
 
   
